@@ -35,3 +35,44 @@ body {
   justify-content: flex-end;
   align-items: center;
 }
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.buttons .zero {
+  grid-column: span 2;
+}
+
+.buttons button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b344a;
+  color: #f8fafc;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.buttons [data-operator] {
+  background-color: #8b5cf6;
+}
+
+.buttons [data-action="equals"] {
+  background-color: #a78bfa;
+}
+
+.buttons [data-action="clear"] {
+  background-color: #f87171;
+}
+
+.buttons button:hover {
+    filter: brightness(1.15);
+}
+
+.buttons button:focus-visible{
+    outline: 2px solid #f8fafc;
+    outline-offset: 2px;
+}
