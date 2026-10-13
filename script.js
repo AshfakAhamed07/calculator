@@ -103,19 +103,23 @@ equalsButton.addEventListener("click", () => {
   }
 });
 
+function roundResult(number) {
+  return Math.round(number * 10 ** 10) / 10 ** 10;
+}
+
 function operate(firstNumber, operator, secondNumber) {
   let firstNum = Number(firstNumber);
   let secondNum = Number(secondNumber);
 
   switch (operator) {
     case "+":
-      return firstNum + secondNum;
+      return roundResult(firstNum + secondNum);
     case "-":
-      return firstNum - secondNum;
+      return roundResult(firstNum - secondNum);
     case "*":
-      return firstNum * secondNum;
+      return roundResult(firstNum * secondNum);
     case "/":
-      return secondNum === 0 ? "Cannot divide by zero" : firstNum / secondNum;
+      return secondNum === 0 ? "Cannot divide by zero" : roundResult(firstNum / secondNum);
     default:
       return "Please select an operator..";
   }
