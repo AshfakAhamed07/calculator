@@ -4,6 +4,7 @@ const clearButton = document.querySelector("[data-action='clear']");
 const decimalButton = document.querySelector("[data-action='decimal']");
 const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-action='equals']");
+const backspaceButton = document.querySelector("[data-action='backspace']");
 
 let currentInput = "0";
 let previousInput = null;
@@ -126,3 +127,18 @@ function operate(firstNumber, operator, secondNumber) {
       return "Please select an operator..";
   }
 }
+
+backspaceButton.addEventListener("click", () => {
+  currentInput = String(currentInput);
+  if (currentInput === "0" || currentInput === "") {
+    return;
+  }
+
+  currentInput = currentInput.slice(0, -1);
+
+  currentInput === ""
+    ? (display.textContent = "0")
+    : (display.textContent = currentInput);
+
+  resultDisplayed = false;
+});

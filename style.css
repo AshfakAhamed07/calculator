@@ -68,6 +68,10 @@ body {
   background-color: #f87171;
 }
 
+.buttons [data-action="backspace"] {
+  background-color: #64748b;
+}
+
 .buttons button:hover {
   filter: brightness(1.15);
 }
