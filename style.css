@@ -13,7 +13,7 @@ body {
 }
 
 .calculator {
-  width: 320px;
+  width: min(320px, calc(100% - 32px));
   padding: 20px;
   border-radius: 12px;
   background-color: #211b2e;
@@ -69,10 +69,10 @@ body {
 }
 
 .buttons button:hover {
-    filter: brightness(1.15);
+  filter: brightness(1.15);
 }
 
-.buttons button:focus-visible{
-    outline: 2px solid #f8fafc;
-    outline-offset: 2px;
+.buttons button:focus-visible {
+  outline: 2px solid #f8fafc;
+  outline-offset: 2px;
 }

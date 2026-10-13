@@ -119,7 +119,9 @@ function operate(firstNumber, operator, secondNumber) {
     case "*":
       return roundResult(firstNum * secondNum);
     case "/":
-      return secondNum === 0 ? "Cannot divide by zero" : roundResult(firstNum / secondNum);
+      return secondNum === 0
+        ? "Cannot divide by zero"
+        : roundResult(firstNum / secondNum);
     default:
       return "Please select an operator..";
   }
