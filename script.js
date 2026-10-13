@@ -9,10 +9,11 @@ let currentInput = "0";
 let previousInput = null;
 let operator = null;
 let resultDisplayed = false;
+let lastOperand = null;
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
-    let clickedDigit = event.target.textContent;
+    const clickedDigit = button.textContent;
     if (resultDisplayed) {
       currentInput = clickedDigit;
       display.textContent = currentInput;
@@ -33,6 +34,7 @@ clearButton.addEventListener("click", () => {
   operator = null;
   resultDisplayed = false;
   display.textContent = "0";
+  lastOperand = null;
 });
 
 decimalButton.addEventListener("click", () => {
@@ -53,9 +55,14 @@ decimalButton.addEventListener("click", () => {
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     let clickedOperator = button.dataset.operator;
-    previousInput = currentInput;
-    operator = clickedOperator;
-    currentInput = "";
+
+    if (currentInput === "") {
+      operator = clickedOperator;
+    } else {
+      previousInput = currentInput;
+      operator = clickedOperator;
+      currentInput = "";
+    }
     resultDisplayed = false;
   });
 });
@@ -66,7 +73,12 @@ equalsButton.addEventListener("click", () => {
   } else if (!operator) {
     display.textContent = "Please select an operator to do the operation";
   } else {
-    const result = calculate(previousInput, operator, currentInput);
+    if (!resultDisplayed) {
+      lastOperand = currentInput;
+    }
+    const result = resultDisplayed
+      ? calculate(currentInput, operator, lastOperand)
+      : calculate(previousInput, operator, currentInput);
     if (typeof result === "number") {
       currentInput = result;
       display.textContent = currentInput;
