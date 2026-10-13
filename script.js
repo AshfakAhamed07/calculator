@@ -54,15 +54,25 @@ decimalButton.addEventListener("click", () => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    let clickedOperator = button.dataset.operator;
+    const clickedOperator = button.dataset.operator;
 
     if (currentInput === "") {
       operator = clickedOperator;
     } else {
+      if (previousInput !== null && operator !== null) {
+        const result = operate(previousInput, operator, currentInput);
+
+        if (typeof result === "number") {
+          currentInput = result;
+          display.textContent = currentInput;
+        }
+      }
+
       previousInput = currentInput;
       operator = clickedOperator;
       currentInput = "";
     }
+
     resultDisplayed = false;
   });
 });
@@ -77,8 +87,8 @@ equalsButton.addEventListener("click", () => {
       lastOperand = currentInput;
     }
     const result = resultDisplayed
-      ? calculate(currentInput, operator, lastOperand)
-      : calculate(previousInput, operator, currentInput);
+      ? operate(currentInput, operator, lastOperand)
+      : operate(previousInput, operator, currentInput);
     if (typeof result === "number") {
       currentInput = result;
       display.textContent = currentInput;
@@ -93,7 +103,7 @@ equalsButton.addEventListener("click", () => {
   }
 });
 
-function calculate(firstNumber, operator, secondNumber) {
+function operate(firstNumber, operator, secondNumber) {
   let firstNum = Number(firstNumber);
   let secondNum = Number(secondNumber);
 
